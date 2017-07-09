@@ -42,18 +42,20 @@ namespace WebApiClubQuiz.Controllers
 
         [HttpGet]
         [Route("api/Quizs")]
-        public string Quizs()
+        public IQueryable<Quiz> Quizs()
         {
-            string json = JsonConvert.SerializeObject(db.Quizs.ToList(), Formatting.Indented);
-            return json;
+            //string json = JsonConvert.SerializeObject(db.Quizs.ToList(), Formatting.Indented);
+            //return json;
+            return db.Quizs;
         }
 
         [HttpGet]
         [Route("api/Scores")]
-        public string Scores()
+        public IEnumerable<Scores> Scores()
         {
-            string json = JsonConvert.SerializeObject(db.Scores.ToList().OrderByDescending(u => u.score).Take(10), Formatting.Indented);
-            return json;
+            //string json = JsonConvert.SerializeObject(db.Scores.ToList().OrderByDescending(u => u.score).Take(10), Formatting.Indented);
+            //return json;
+            return db.Scores.ToList().OrderByDescending(u => u.score).Take(10);
         }
 
         [HttpPost]
